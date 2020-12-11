@@ -8,31 +8,36 @@ titulo.textContent = "Aparecida Nutricionista";
 //Sobrepeso, quando o resultado está entre 24,9 e 30 kg/m2;
 //Obesidade, quando o resultado é maior que 30 kg/m2.
 
-var paciente01 = document.querySelector("#paciente01");
 
-var pesoPaciente01 = paciente01.querySelector(".info-peso")
-var peso = pesoPaciente01.textContent;
+var pacientes = document.querySelectorAll(".paciente");
 
-var alturaPaciente01 = paciente01.querySelector(".info-altura");
-var altura = alturaPaciente01.textContent;
+for (var i = 0; i < pacientes.length; i++) {
 
-var pesoValido = true;
-var alturavalida = true;
+    var paciente = pacientes[i];
+    
+    var pesoPaciente = paciente.querySelector(".info-peso")
+    var peso = pesoPaciente.textContent;
 
-var infoImc = document.querySelector(".info-imc");
+    var alturaPaciente = paciente.querySelector(".info-altura");
+    var altura = alturaPaciente.textContent;
+    
+    var infoImc = paciente.querySelector(".info-imc");
 
-if (peso <= 0 || peso >=800) {
-    pesoValido = false;
-    infoImc.textContent = "Peso Inválido!";
+    var pesoValido = true;
+    var alturavalida = true;
+
+    if (peso <= 0 || peso >=800) {
+        pesoValido = false;
+        infoImc.textContent = "Peso Inválido!";
+    }
+
+    if (altura <= 0 || altura >=3.00) {
+        alturavalida = false;
+        infoImc.textContent = "Altura Inválido!";
+    }
+
+    if (pesoValido && alturavalida) {
+        var imc = peso / (altura * altura);
+        infoImc.textContent = imc.toFixed(2);
+    }
 }
-
-if (altura <= 0 || altura >=3.00) {
-    alturavalida = false;
-    infoImc.textContent = "Altura Inválido!";
-}
-
-if (pesoValido && alturavalida) {
-    var imc = peso / (altura * altura);
-    infoImc.textContent = imc;
-}
-//teste mundanca nome repositorio
