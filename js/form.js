@@ -4,23 +4,50 @@ adicionarPaciente.addEventListener("click", function(e) {
 
     var form = document.querySelector("#form-adicionar");
 
-    var nome = form.nome.value;
-    var peso = form.peso.value;
-    var altura = form.altura.value;
-    var gordura = form.gordura.value;
+    var paciente = obterPacienteFormulario(form);
 
+    var pacienteTr = montaLinha(paciente);
+    
+    var novoPaciente = document.querySelector("#tabela-pacientes");
+    novoPaciente.appendChild(pacienteTr);
+
+    form.reset();
+
+});
+
+function obterPacienteFormulario(form) {
+    var paciente = {
+        nome: form.nome.value,
+        peso: form.peso.value,
+        altura: form.altura.value,
+        gordura: form.gordura.value,
+        imc: calculaImc(form.peso.value, form.altura.value)
+    }
+
+    return paciente;
+}
+
+function montaLinha(paciente) {
     var pacienteTr = document.createElement("tr");
+    pacienteTr.classList.add("paciente");
+
     var nomeTd = document.createElement("td");
     var pesoTd = document.createElement("td");
     var alturaTd = document.createElement("td");
     var gorduraTd = document.createElement("td");
     var imcTd = document.createElement("td");
 
-    nomeTd.textContent = nome;
-    pesoTd.textContent = peso;
-    alturaTd.textContent = altura;
-    gorduraTd.textContent = gordura;
-    imcTd.textContent = calculaImc(peso, altura);
+    nomeTd.classList.add("info-nome");
+    pesoTd.classList.add("info-peso");
+    alturaTd.classList.add("info-altura");
+    gorduraTd.classList.add("info-gordura");
+    imcTd.classList.add("info-imc");
+
+    nomeTd.textContent = paciente.nome;
+    pesoTd.textContent = paciente.peso;
+    alturaTd.textContent = paciente.altura;
+    gorduraTd.textContent = paciente.gordura;
+    imcTd.textContent = paciente.imc
 
     pacienteTr.appendChild(nomeTd);
     pacienteTr.appendChild(pesoTd);
@@ -28,7 +55,6 @@ adicionarPaciente.addEventListener("click", function(e) {
     pacienteTr.appendChild(gorduraTd);
     pacienteTr.appendChild(imcTd);
 
-    var novoPaciente = document.querySelector("#tabela-pacientes");
-    novoPaciente.appendChild(pacienteTr);
 
-});
+    return pacienteTr;
+}
