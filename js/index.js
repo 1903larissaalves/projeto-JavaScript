@@ -35,3 +35,4 @@ if (pesoValido && alturavalida) {
     var imc = peso / (altura * altura);
     infoImc.textContent = imc;
 }
+//teste mundanca nome repositorio
